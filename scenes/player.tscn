@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://c61y36lbla168"]
+
+[ext_resource type="Texture2D" uid="uid://gf86wwx6saai" path="res://Assets/BreakOut Assets x2.png" id="1_4flbx"]
+[ext_resource type="Script" uid="uid://prtd07u15plp" path="res://Scripts/player.gd" id="1_g2els"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dhhex"]
+radius = 7.0
+height = 96.0
+
+[node name="Player" type="AnimatableBody2D" unique_id=40477756]
+sync_to_physics = false
+script = ExtResource("1_g2els")
+
+[node name="BreakOutAssetsX2" type="Sprite2D" parent="." unique_id=279541342]
+texture = ExtResource("1_4flbx")
+region_enabled = true
+region_rect = Rect2(256, 496, 96, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1442214157]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_dhhex")

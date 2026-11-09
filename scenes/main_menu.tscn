@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://dughj3ox21kgw"]
+
+[ext_resource type="Theme" uid="uid://dd2gasv2vykvn" path="res://UI/menu_theme.tres" id="1_ekxnf"]
+[ext_resource type="PackedScene" uid="uid://c2tun2rsuefh8" path="res://UI/play_button.tscn" id="1_l6cm7"]
+
+[node name="MainMenu" type="Control" unique_id=1650336010]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ekxnf")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1267784474]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=508049942]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/VBoxContainer" unique_id=587732080]
+layout_mode = 2
+theme_type_variation = &"RichTextLableMenu"
+text = "Title Screen"
+fit_content = true
+autowrap_mode = 0
+
+[node name="PlayButton" parent="PanelContainer/VBoxContainer" unique_id=203338514 instance=ExtResource("1_l6cm7")]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Start"
+
+[node name="QuitButton" parent="PanelContainer/VBoxContainer" unique_id=1701894702 instance=ExtResource("1_l6cm7")]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Exit"

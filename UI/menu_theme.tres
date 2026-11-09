@@ -1,0 +1,29 @@
+[gd_resource type="Theme" format=3 uid="uid://dd2gasv2vykvn"]
+
+[ext_resource type="StyleBox" uid="uid://0iifkiql78x2" path="res://UI/Flat_styleBox_menu.tres" id="1_ptyj5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ptyj5"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lk8tw"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 1, 1, 1)
+
+[resource]
+Button/styles/focus = SubResource("StyleBoxFlat_ptyj5")
+Button/styles/hover = SubResource("StyleBoxFlat_lk8tw")
+Button/styles/normal = ExtResource("1_ptyj5")
+Button/styles/pressed = ExtResource("1_ptyj5")
+PanelContainer/styles/panel = ExtResource("1_ptyj5")
+RichTextLabel/colors/default_color = Color(1, 1, 1, 1)
+RichTextLableMenu/base_type = &"RichTextLabel"
+RichTextLableMenu/font_sizes/normal_font_size = 64

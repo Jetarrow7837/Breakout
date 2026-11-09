@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://b0tntcmpggrao"]
+
+[ext_resource type="Script" uid="uid://clywf53p22wqq" path="res://Scripts/game.gd" id="1_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://c61y36lbla168" path="res://scenes/player.tscn" id="1_yqjtg"]
+[ext_resource type="PackedScene" uid="uid://bwthlo64pi2gx" path="res://scenes/ball.tscn" id="2_lnu2h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dhhex"]
+size = Vector2(11, 378)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yqjtg"]
+size = Vector2(20, 374)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lnu2h"]
+size = Vector2(670, 11)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7fbtk"]
+size = Vector2(742, 20)
+
+[node name="game" type="Node2D" unique_id=1800057702 node_paths=PackedStringArray("life", "score_lb")]
+script = ExtResource("1_lbhrr")
+life = NodePath("HUD/life")
+score_lb = NodePath("HUD/PanelContainer/Score")
+
+[node name="Player" parent="." unique_id=2110744990 instance=ExtResource("1_yqjtg")]
+position = Vector2(320, 320)
+
+[node name="Ball" parent="." unique_id=1839983451 instance=ExtResource("2_lnu2h")]
+position = Vector2(320, 280)
+
+[node name="Border" type="StaticBody2D" parent="." unique_id=936611413]
+
+[node name="Left" type="CollisionShape2D" parent="Border" unique_id=1795569948]
+position = Vector2(-4.5, 179)
+shape = SubResource("RectangleShape2D_dhhex")
+
+[node name="Right" type="CollisionShape2D" parent="Border" unique_id=922868030]
+position = Vector2(651, 177)
+shape = SubResource("RectangleShape2D_yqjtg")
+
+[node name="Top" type="CollisionShape2D" parent="Border" unique_id=655258395]
+position = Vector2(325, -4.5)
+shape = SubResource("RectangleShape2D_lnu2h")
+
+[node name="KillZone" type="Area2D" parent="." unique_id=625106012]
+position = Vector2(345, 372)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KillZone" unique_id=348830265]
+shape = SubResource("RectangleShape2D_7fbtk")
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=763963582]
+
+[node name="life" type="Label" parent="HUD" unique_id=465124403]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -46.0
+offset_right = 46.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "Lives: 3"
+
+[node name="PanelContainer" type="PanelContainer" parent="HUD" unique_id=787554489]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Score" type="Label" parent="HUD/PanelContainer" unique_id=1405121315]
+layout_mode = 2
+text = "Score : 0000"
+
+[connection signal="body_entered" from="KillZone" to="." method="_on_kill_zone_body_entered"]
