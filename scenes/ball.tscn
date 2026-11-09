@@ -37,7 +37,7 @@ shape = SubResource("CircleShape2D_cxlvu")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=393177563]
 z_index = -1
-amount = 100
+amount = 1000
 texture = SubResource("AtlasTexture_f7cbr")
 lifetime = 0.4
 emission_shape = 1

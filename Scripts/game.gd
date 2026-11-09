@@ -3,37 +3,52 @@ extends Node2D
 @export var life: Label
 
 @export var score_lb: Label
+##
 
 var score: int = 0000
 var lives = 3
-var rows:= randi_range(2,6)
+var rng = RandomNumberGenerator.new()
+ #set to 100-chance to get chance 
+var spawn_chance = 5:
+	set(value):
+		spawn_chance = clampi(value , 2 , 100)
+var Level : int = 1
+##
+var max_rows = 2 :
+	set(value):
+		max_rows = clampi(value, 2 , 8)
+var min_rows = 2 :
+	set(value):
+		min_rows = clampi(value, 2 , max_rows)
 var cols := 18
+var rows : int 
+
+##
 var margin_h:= 30
 var margin_v:= 20
 var gap_up_down := 20
 var gap_left_right := 34
-var rng =RandomNumberGenerator.new()
-
 func _ready() -> void:
 	rng.seed = 12345
-	for r in rows:
-		for c in cols:
-			var rnum = rng.randi_range(0,15)
-			if rnum > 0:
-				var new_bick : Brick = brick.instantiate()
-				add_child(new_bick)
-				new_bick.connect(&"Scored", update_score)
-				var brick_type := rng.randi_range(0, new_bick.sprite.vframes - 1)
-				new_bick.sprite.frame_coords.y = brick_type
-				new_bick.sprite.frame_coords.x = rng.randi_range(0, new_bick.sprite.hframes - 1)
-				new_bick.position = Vector2(margin_h + (gap_left_right * c), margin_v + (gap_up_down * r))
+	
+	setup_lv()
 
 
 
 
 
 func _process(_delta: float) -> void:
+	var bricks := get_tree().get_nodes_in_group("Brick")
+	if bricks.size() == 1:
+		min_rows += 1
+		max_rows += 1
+		spawn_chance += 5
+		Level += 1
+		setup_lv()
+		
 	
+	if Input.is_action_just_pressed("ui_cancel"):
+		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 	if lives<=0:
 		await get_tree().create_timer(1).timeout
 		get_tree().reload_current_scene()
@@ -43,7 +58,19 @@ func _process(_delta: float) -> void:
 
 
 
-
+func setup_lv():
+	rows = rng.randi_range(min_rows,max_rows)
+	for r in rows:
+		for c in cols:
+			var rnum = rng.randi_range(0,spawn_chance)
+			if rnum > 0:
+				var new_bick : Brick = brick.instantiate()
+				add_child(new_bick)
+				new_bick.connect(&"Scored", update_score)
+				var brick_type := rng.randi_range(0, new_bick.sprite.vframes - 1)
+				new_bick.sprite.frame_coords.y = brick_type
+				new_bick.sprite.frame_coords.x = rng.randi_range(0, new_bick.sprite.hframes - 1)
+				new_bick.position = Vector2(margin_h + (gap_left_right * c), margin_v + (gap_up_down * r))
 
 func update_score():
 	
